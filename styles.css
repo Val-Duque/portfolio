@@ -1,11 +1,6 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
 
 body {
-    background-color: #a97fc5;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
     font-family: "Shadows Into Light", cursive;
     font-weight: 200;
     font-style: normal;
@@ -22,53 +17,58 @@ body {
 }
 
 p {
-    color: #000000;
+    color: #4a5568;
     font-size: 2em;
     margin-bottom: 30px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 a {
-    color: #770059;
+    color: #667eea;
     text-decoration: none;
-    transition: color 0.3s;
+    transition: all 0.3s ease;
     font-weight: 900;
 }
 
 a:hover {
-    color: #030303;
+    color: #764ba2;
     text-decoration: underline;
+    transform: translateY(-1px);
 }
 
 table {
     width: 100%;
     margin: 20px auto;
     border-collapse: collapse;
-    background-color: rgba(255, 255, 255, 0.15);
+    background-color: rgba(255, 255, 255, 0.8);
     border-radius: 15px;
     overflow: hidden;
     table-layout: auto;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
 }
 
 th {
-    background-color: rgba(255, 255, 255, 0.25);
-    color: #000000;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #ffffff;
     padding: 20px 15px;
     text-align: center;
     font-size: 1.8em;
     font-weight: 400;
-    border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+    border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 td {
     padding: 20px 15px;
     text-align: center;
-    border-top: 1px solid rgba(200, 200, 200, 0.2);
+    border-top: 1px solid rgba(200, 200, 200, 0.3);
     font-size: 1.3em;
     vertical-align: middle;
     word-wrap: break-word;
     overflow-wrap: break-word;
     min-width: 150px;
+    color: #4a5568;
 }
 
 td p {
