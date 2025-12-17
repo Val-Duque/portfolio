@@ -45,7 +45,7 @@ class CatMusicPlayer {
         const playerHTML = `
             <div class="music-player">
                 <div class="playlist-container" id="playlist">
-                    <div class="playlist-header">🎧 DJ Cats Playlist 🐱</div>
+                    <div class="playlist-header">🐾 Playlist de Michis 🐱</div>
                     ${this.playlist.map((song, index) => `
                         <div class="playlist-item ${index === 0 ? 'active' : ''}" data-index="${index}">
                             <div>${song.title}</div>
@@ -58,7 +58,7 @@ class CatMusicPlayer {
                     <div class="song-info">
                         <div class="song-title" id="songTitle">Selecciona una canción</div>
                         <div class="song-artist" id="songArtist">Esperando música...</div>
-                        <div class="dj-cats-logo">🎧 DJ Cats 🐱</div>
+                        <div class="dj-cats-logo">🐾 DJ Michi en la casa 🐱</div>
                     </div>
                     
                     <div class="player-controls">
@@ -104,7 +104,7 @@ class CatMusicPlayer {
                         <div class="eq-bar"></div>
                     </div>
                     
-                    <div class="dancing-cat" id="dancingCat">🎧</div>
+                    <div class="dancing-cat" id="dancingCat">😸</div>
                 </div>
             </div>
         `;
