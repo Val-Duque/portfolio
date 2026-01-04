@@ -6,44 +6,49 @@ class CatMusicPlayer {
         this.isPlaying = false;
         this.volume = 0.7;
         this.showPlaylist = false;
-        
+        this.isMinimized = false; // Estado minimizado
+
         // Lista de canciones de ejemplo (puedes cambiar estas por tus propias canciones)
         this.playlist = [
             {
-                title: "Chill Cat Vibes",
-                artist: "DJ Whiskers",
+                title: "Vibras de Gato Relajado",
+                artist: "DJ Bigotes",
                 src: "https://www.soundjay.com/misc/sounds/bell-ringing-05.wav" // Ejemplo
             },
             {
-                title: "Purr-fect Beat", 
-                artist: "Feline Groove",
+                title: "Ritmo Perfecto",
+                artist: "Ritmo Felino",
                 src: "https://www.soundjay.com/misc/sounds/bell-ringing-05.wav" // Ejemplo
             },
             {
-                title: "Meow Mix Remix",
-                artist: "DJ Cats Collective",
+                title: "Mezcla de Miau Remix",
+                artist: "Colectivo DJ Gatos",
                 src: "https://www.soundjay.com/misc/sounds/bell-ringing-05.wav" // Ejemplo
             },
             {
-                title: "Catnip Dreams",
-                artist: "Paw-some Beats",
+                title: "Sueños de Hierba Gatera",
+                artist: "Ritmos Asombrosos",
                 src: "https://www.soundjay.com/misc/sounds/bell-ringing-05.wav" // Ejemplo
             }
         ];
-        
+
         this.init();
     }
-    
+
     init() {
         this.createPlayer();
         this.setupEventListeners();
         this.loadSong(0);
         this.updateDisplay();
     }
-    
+
     createPlayer() {
+        // Estructura HTML del reproductor
+        // Se inyecta dinámicamente en el DOM
         const playerHTML = `
-            <div class="music-player">
+            <div class="music-player" id="musicPlayer">
+                <!-- Botón Minimizar -->
+                <button class="minimize-btn" id="minimizeBtn" title="Minimizar">▼</button>
                 <div class="playlist-container" id="playlist">
                     <div class="playlist-header">🐾 Playlist de Michis 🐱</div>
                     ${this.playlist.map((song, index) => `
@@ -108,24 +113,26 @@ class CatMusicPlayer {
                 </div>
             </div>
         `;
-        
+
         document.body.insertAdjacentHTML('beforeend', playerHTML);
     }
-    
+
     setupEventListeners() {
         // Controles principales
         document.getElementById('playBtn').addEventListener('click', () => this.togglePlay());
         document.getElementById('prevBtn').addEventListener('click', () => this.previousSong());
         document.getElementById('nextBtn').addEventListener('click', () => this.nextSong());
+        document.getElementById('nextBtn').addEventListener('click', () => this.nextSong());
         document.getElementById('playlistBtn').addEventListener('click', () => this.togglePlaylist());
-        
+        document.getElementById('minimizeBtn').addEventListener('click', () => this.toggleMinimize());
+
         // Barra de progreso
         document.getElementById('progressBar').addEventListener('click', (e) => this.seek(e));
-        
+
         // Control de volumen
         document.getElementById('volumeSlider').addEventListener('input', (e) => this.setVolume(e.target.value));
         document.getElementById('volumeIcon').addEventListener('click', () => this.toggleMute());
-        
+
         // Lista de reproducción
         document.querySelectorAll('.playlist-item').forEach(item => {
             item.addEventListener('click', (e) => {
@@ -134,16 +141,16 @@ class CatMusicPlayer {
                 this.play();
             });
         });
-        
+
         // Eventos del audio
         this.audio.addEventListener('timeupdate', () => this.updateProgress());
         this.audio.addEventListener('ended', () => this.nextSong());
         this.audio.addEventListener('loadedmetadata', () => this.updateDisplay());
-        
+
         // Teclas de acceso rápido
         document.addEventListener('keydown', (e) => {
             if (e.target.tagName !== 'INPUT') {
-                switch(e.code) {
+                switch (e.code) {
                     case 'Space':
                         e.preventDefault();
                         this.togglePlay();
@@ -158,7 +165,7 @@ class CatMusicPlayer {
             }
         });
     }
-    
+
     loadSong(index) {
         if (index >= 0 && index < this.playlist.length) {
             this.currentSongIndex = index;
@@ -168,7 +175,7 @@ class CatMusicPlayer {
             this.updatePlaylistActive();
         }
     }
-    
+
     togglePlay() {
         if (this.isPlaying) {
             this.pause();
@@ -176,7 +183,7 @@ class CatMusicPlayer {
             this.play();
         }
     }
-    
+
     play() {
         this.audio.play().then(() => {
             this.isPlaying = true;
@@ -188,14 +195,14 @@ class CatMusicPlayer {
             this.playExampleSound();
         });
     }
-    
+
     pause() {
         this.audio.pause();
         this.isPlaying = false;
         this.updatePlayButton();
         this.stopDancing();
     }
-    
+
     previousSong() {
         const newIndex = this.currentSongIndex > 0 ? this.currentSongIndex - 1 : this.playlist.length - 1;
         this.loadSong(newIndex);
@@ -203,7 +210,7 @@ class CatMusicPlayer {
             this.play();
         }
     }
-    
+
     nextSong() {
         const newIndex = this.currentSongIndex < this.playlist.length - 1 ? this.currentSongIndex + 1 : 0;
         this.loadSong(newIndex);
@@ -211,24 +218,24 @@ class CatMusicPlayer {
             this.play();
         }
     }
-    
+
     seek(e) {
         const progressBar = e.currentTarget;
         const rect = progressBar.getBoundingClientRect();
         const percent = (e.clientX - rect.left) / rect.width;
         const newTime = percent * this.audio.duration;
-        
+
         if (!isNaN(newTime)) {
             this.audio.currentTime = newTime;
         }
     }
-    
+
     setVolume(value) {
         this.volume = value / 100;
         this.audio.volume = this.volume;
         this.updateVolumeIcon();
     }
-    
+
     toggleMute() {
         if (this.audio.volume > 0) {
             this.audio.volume = 0;
@@ -239,40 +246,87 @@ class CatMusicPlayer {
         }
         this.updateVolumeIcon();
     }
-    
+
     togglePlaylist() {
         this.showPlaylist = !this.showPlaylist;
         const playlist = document.getElementById('playlist');
         playlist.classList.toggle('show', this.showPlaylist);
     }
-    
+
+    // Función para manejar la minimización del reproductor
+    toggleMinimize() {
+        this.isMinimized = !this.isMinimized;
+        const player = document.getElementById('musicPlayer');
+        const btn = document.getElementById('minimizeBtn');
+
+        // Agrega/quita la clase .minimized (definida en CSS) valiéndose del booleano
+        player.classList.toggle('minimized', this.isMinimized);
+
+        // Cambia el icono de flecha hacia arriba o abajo
+        btn.textContent = this.isMinimized ? '▲' : '▼';
+        btn.title = this.isMinimized ? 'Maximizar' : 'Minimizar';
+
+        // Si se minimiza, cerrar playlist si está abierta para evitar comportamientos extraños
+        if (this.isMinimized && this.showPlaylist) {
+            this.togglePlaylist();
+        }
+    }
+
+    // ==========================================
+    // ESPACIO PARA INTEGRACIÓN DE API DE MÚSICA
+    // ==========================================
+    // Esta función es un placeholder (espacio reservado) para conectar futuras APIs
+    async fetchSongsFromAPI() {
+        // TODO: Implementar conexión con API de música (ej. Spotify, SoundCloud, YouTube API)
+        console.log("Conectando con API de música... (Funcionalidad pendiente de API Key)");
+        /*
+        EJEMPLO DE COMO SE IMPLEMENTARÍA:
+        try {
+            const response = await fetch('URL_DE_TU_API_AQUI');
+            const data = await response.json();
+            
+            // Aquí mapeas los datos de la API al formato de nuestro reproductor
+            this.playlist = data.map(song => ({
+                title: song.name,
+                artist: song.artist,
+                src: song.url
+            }));
+            
+            // Recargar la primera canción
+            this.loadSong(0);
+        } catch (error) {
+            console.error("Error al cargar canciones:", error);
+        }
+        */
+    }
+
     updateProgress() {
         if (this.audio.duration) {
             const percent = (this.audio.currentTime / this.audio.duration) * 100;
             document.getElementById('progressFill').style.width = percent + '%';
-            
+
             document.getElementById('currentTime').textContent = this.formatTime(this.audio.currentTime);
             document.getElementById('totalTime').textContent = this.formatTime(this.audio.duration);
         }
     }
-    
+
     updateDisplay() {
         const song = this.playlist[this.currentSongIndex];
         document.getElementById('songTitle').textContent = song.title;
         document.getElementById('songArtist').textContent = song.artist;
     }
-    
+
     updatePlayButton() {
         const playBtn = document.getElementById('playBtn');
         const icon = playBtn.querySelector('span');
-        
+
         if (this.isPlaying) {
             icon.className = 'pause-icon';
         } else {
             icon.className = 'play-icon';
         }
     }
-    
+
     updateVolumeIcon() {
         const volumeIcon = document.getElementById('volumeIcon');
         if (this.audio.volume === 0) {
@@ -283,51 +337,51 @@ class CatMusicPlayer {
             volumeIcon.textContent = '🔊';
         }
     }
-    
+
     updatePlaylistActive() {
         document.querySelectorAll('.playlist-item').forEach((item, index) => {
             item.classList.toggle('active', index === this.currentSongIndex);
         });
     }
-    
+
     startDancing() {
         document.getElementById('dancingCat').classList.add('active');
         document.getElementById('equalizer').classList.add('active');
     }
-    
+
     stopDancing() {
         document.getElementById('dancingCat').classList.remove('active');
         document.getElementById('equalizer').classList.remove('active');
     }
-    
+
     formatTime(seconds) {
         if (isNaN(seconds)) return '0:00';
-        
+
         const mins = Math.floor(seconds / 60);
         const secs = Math.floor(seconds % 60);
         return `${mins}:${secs.toString().padStart(2, '0')}`;
     }
-    
+
     // Función para reproducir sonido de ejemplo si no hay archivos de audio
     playExampleSound() {
         // Crear un tono simple usando Web Audio API
         const audioContext = new (window.AudioContext || window.webkitAudioContext)();
         const oscillator = audioContext.createOscillator();
         const gainNode = audioContext.createGain();
-        
+
         oscillator.connect(gainNode);
         gainNode.connect(audioContext.destination);
-        
+
         oscillator.frequency.setValueAtTime(440, audioContext.currentTime); // Nota A4
         gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
-        
+
         oscillator.start();
         oscillator.stop(audioContext.currentTime + 0.5);
-        
+
         this.isPlaying = true;
         this.updatePlayButton();
         this.startDancing();
-        
+
         setTimeout(() => {
             this.isPlaying = false;
             this.updatePlayButton();
@@ -339,7 +393,7 @@ class CatMusicPlayer {
 // Inicializar el reproductor cuando se carga la página
 document.addEventListener('DOMContentLoaded', () => {
     const player = new CatMusicPlayer();
-    
+
     console.log(`
 🎧 DJ Cats Music Player iniciado! 🐱
     

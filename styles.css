@@ -1,11 +1,33 @@
 body {
-    background: linear-gradient(135deg, #fff0f5 0%, #ffe4e1 100%);
+    /* Fondo con gradiente animado (Azul, Morado, Rosa) */
+    background: linear-gradient(-45deg, #4facfe, #00f2fe, #a18cd1, #fbc2eb, #ff9a9e, #fecfef);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
     font-family: "Shadows Into Light", cursive;
     font-weight: 200;
     font-style: normal;
     min-height: 100vh;
-    padding: 40px 20px;
-    color: #5d4037;
+
+    /* PADDING INFERIOR IMPORTANTE:
+       Se agrega 250px extra al final para que el reproductor de música 
+       no tape el contenido de la tabla al hacer scroll hasta abajo. */
+    padding: 40px 20px 250px 20px;
+    color: #0d47a1;
+}
+
+/* Animación que mueve el fondo de colores */
+@keyframes gradientBG {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
 }
 
 .container {
@@ -17,21 +39,21 @@ body {
 }
 
 p {
-    color: #ff4d6d;
+    color: #1565c0;
     font-size: 2em;
     margin-bottom: 30px;
     text-shadow: 1px 1px 0 #fff;
 }
 
 a {
-    color: #ff4d6d;
+    color: #1565c0;
     text-decoration: none;
     transition: all 0.3s ease;
     font-weight: 900;
 }
 
 a:hover {
-    color: #ff8fa3;
+    color: #42a5f5;
     text-decoration: underline;
     transform: translateY(-1px);
 }
@@ -43,40 +65,42 @@ table {
     background-color: rgba(255, 255, 255, 0.9);
     border-radius: 20px;
     overflow: hidden;
-    table-layout: auto;
-    box-shadow: 0 10px 30px rgba(255, 182, 193, 0.4);
+    table-layout: fixed;
+    /* Ensures columns respect width */
+    box-shadow: 0 10px 30px rgba(33, 150, 243, 0.3);
     backdrop-filter: blur(10px);
-    border: 3px solid #ffb3c6;
+    border: 3px solid #90caf9;
 }
 
 th {
-    background: linear-gradient(135deg, #ff8fa3 0%, #ff4d6d 100%);
+    background: linear-gradient(135deg, #64b5f6 0%, #1976d2 100%);
     color: #ffffff;
-    padding: 20px 15px;
+    padding: 25px 20px;
     text-align: center;
-    font-size: 1.8em;
+    font-size: 2em;
+    /* Increased size */
     font-weight: 400;
-    border-bottom: 3px solid #ffe5ec;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+    border-bottom: 3px solid #e3f2fd;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
 }
 
 td {
-    padding: 20px 15px;
+    padding: 25px 20px;
+    /* Increased size */
     text-align: center;
-    border-top: 1px solid #ffe5ec;
-    font-size: 1.3em;
+    border-top: 1px solid #e3f2fd;
+    font-size: 1.4em;
     vertical-align: middle;
     word-wrap: break-word;
     overflow-wrap: break-word;
-    min-width: 150px;
-    color: #885a5a;
+    color: #1565c0;
 }
 
 td p {
     margin: 0;
     padding: 0;
     line-height: 1.4;
-    color: #885a5a;
+    color: #1565c0;
     font-size: 1em;
     text-shadow: none;
 }
@@ -100,14 +124,13 @@ td br {
     }
 
     th {
-        font-size: 1.5em;
-        padding: 15px 10px;
+        font-size: 1.7em;
+        padding: 20px 15px;
     }
 
     td {
-        font-size: 1.1em;
-        padding: 15px 10px;
-        min-width: 120px;
+        font-size: 1.2em;
+        padding: 20px 15px;
     }
 }
 
@@ -117,14 +140,13 @@ td br {
     }
 
     th {
-        font-size: 1.3em;
-        padding: 12px 8px;
+        font-size: 1.4em;
+        padding: 15px 10px;
     }
 
     td {
-        font-size: 1em;
-        padding: 12px 8px;
-        min-width: 100px;
+        font-size: 1.1em;
+        padding: 15px 10px;
     }
 
     table {
@@ -143,14 +165,13 @@ td br {
     }
 
     th {
-        font-size: 1.1em;
-        padding: 10px 5px;
+        font-size: 1.2em;
+        padding: 12px 8px;
     }
 
     td {
-        font-size: 0.9em;
-        padding: 10px 5px;
-        min-width: 80px;
+        font-size: 1em;
+        padding: 12px 8px;
     }
 
     /* En móviles muy pequeños, hacer la tabla scrolleable */
@@ -158,6 +179,8 @@ td br {
         display: block;
         overflow-x: auto;
         white-space: nowrap;
+        table-layout: auto;
+        /* Reset specifically for mobile scroll */
     }
 
     table tbody,
@@ -165,5 +188,11 @@ td br {
     table td {
         display: table;
         width: 100%;
+    }
+
+    td {
+        display: block;
+        /* Stack cells on mobile if needed or keep as table-cell depending on preference, sticking to horizontal scroll for now */
+        display: table-cell;
     }
 }
