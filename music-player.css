@@ -1,50 +1,77 @@
-/* DJ Cats - Reproductor de música (Kitty Theme 🐱) */
+/* =========================================================
+   ESTILOS DEL REPRODUCTOR DE MÚSICA (TEMA DE GATITOS)
+   =========================================================
+   Aquí controlamos cómo se ve toda la cajita de música.
+   Los colores principales son azules y morados.
+*/
+
 .music-player {
+    /* POSICIÓN FIJA: Para que flote en la pantalla aunque bajes el scroll */
     position: fixed;
     bottom: 20px;
+    /* Separación desde abajo */
     left: 20px;
+    /* Separación desde la izquierda */
     right: 20px;
-    /* Fondo del reproductor: Gradiente Azul a Morado para combinar con el index */
+    /* Se estira a lo ancho (respetando los márgenes) */
+
+    /* FONDO DE COLOR: Un degradado bonito */
     background: linear-gradient(135deg, #e3f2fd 0%, #ce93d8 100%);
-    /* Blue to Purple */
+
     padding: 15px 25px;
-    /* Sombra azul suave */
+    /* Espacio interior (relleno) */
+
+    /* SOMBRA Y BORDES: Para que parezca flotar y tenga estilo "cristal" */
     box-shadow: 0 10px 30px rgba(100, 181, 246, 0.6);
-    /* Blue shadow */
     z-index: 999;
+    /* Asegura que esté ENCIMA de todo lo demás (muy importante) */
     border: 4px solid #fff;
+    /* Borde blanco grueso */
     border-radius: 30px;
+    /* Bordes redondeados */
     backdrop-filter: blur(10px);
+    /* Efecto de borrosidad detrás (tipo vidrio) */
+
+    /* FUENTE: La misma letra "a mano" del resto de la página */
     font-family: 'Shadows Into Light', cursive;
 }
 
 .player-container {
     max-width: 1200px;
+    /* Ancho máximo para que no se desparrame en pantallas gigantes */
     margin: 0 auto;
+    /* Centrado automático */
     display: flex;
+    /* Pone los elementos uno al lado del otro */
     align-items: center;
+    /* Los alinea verticalmente al centro */
     gap: 20px;
+    /* Espacio entre cada elemento (botones, texto, barra) */
     flex-wrap: wrap;
+    /* Si no caben, bajan a la siguiente línea */
 }
 
-/* Información de la canción */
+/* --- INFORMACIÓN DE LA CANCIÓN (Izquierda) --- */
 .song-info {
     flex: 1;
+    /* Ocupa el espacio disponible */
     min-width: 200px;
     color: #4a148c;
-    /* Deep Purple */
+    /* Color morado oscuro para el texto */
     text-shadow: none;
 }
 
 .song-title {
     font-size: 1.5em;
+    /* Tamaño de letra grande */
     font-weight: bold;
+    /* Negrita */
     margin: 0 0 5px 0;
     white-space: normal;
     overflow: visible;
     text-overflow: clip;
     color: #0d47a1;
-    /* Deep Blue */
+    /* Azul oscuro */
     line-height: 1.2;
 }
 
@@ -52,11 +79,8 @@
     font-size: 1.1em;
     margin: 0;
     opacity: 1;
-    white-space: normal;
-    overflow: visible;
-    text-overflow: clip;
     color: #1565c0;
-    /* Blue */
+    /* Azul medio */
     font-weight: 600;
 }
 
@@ -64,93 +88,114 @@
     font-size: 1em;
     margin-top: 2px;
     color: #6a1b9a;
-    /* Purple */
+    /* Morado */
     font-weight: bold;
 }
 
-/* Controles principales */
+/* --- BOTONES DE CONTROL (Play, Pause, Next) --- */
 .player-controls {
     display: flex;
     align-items: center;
     gap: 15px;
+    /* Separación entre botones */
 }
 
 .control-btn {
     background: #fff;
+    /* Fondo blanco */
     border: 3px solid #90caf9;
-    /* Blue border */
+    /* Borde azul suave */
     border-radius: 50%;
+    /* 50% lo hace perfectamente REDONDO */
     width: 50px;
     height: 50px;
     cursor: pointer;
+    /* Manita al pasar el mouse */
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    /* Animación suave al presionar */
+
+    /* Centrar el icono dentro del círculo */
     display: flex;
     align-items: center;
     justify-content: center;
+
     font-size: 1.2em;
     color: #1565c0;
-    /* Blue icon */
+    /* Color del icono */
     box-shadow: 0 4px 10px rgba(33, 150, 243, 0.3);
     position: relative;
     overflow: hidden;
 }
 
+/* Efecto al pasar el mouse por encima */
 .control-btn:hover {
     background: #e3f2fd;
+    /* Se pone azulito claro */
     border-color: #1565c0;
     transform: translateY(-3px) scale(1.05);
+    /* Se levanta y crece un poco */
     box-shadow: 0 6px 15px rgba(21, 101, 192, 0.3);
+    /* La sombra crece */
 }
 
+/* Efecto al hacer click */
 .control-btn:active {
     transform: translateY(0) scale(0.95);
+    /* Se hunde un poco */
 }
 
-/* Botón de play especial - DJ Style */
+/* BOTÓN DE PLAY (Es más grande y azul) */
 .play-btn {
     width: 65px;
     height: 65px;
     background: #42a5f5;
-    /* Blue */
+    /* Todo azul */
     border: 4px solid #fff;
     color: #fff;
+    /* Icono blanco */
     box-shadow: 0 4px 15px rgba(33, 150, 243, 0.4);
 }
 
 .play-btn:hover {
     background: #1e88e5;
-    /* Darker Blue */
+    /* Azul más oscuro al pasar el mouse */
     border-color: #fff;
     box-shadow: 0 6px 20px rgba(33, 150, 243, 0.5);
 }
 
-/* Iconos para botones */
+/* --- ICONOS (Emojis usados como iconos) --- */
 .play-icon::before {
     content: "🐾";
+    /* Huellita para Play */
     font-size: 1.2em;
     margin-left: 3px;
 }
 
 .pause-icon::before {
     content: "⏸️";
+    /* Pausa estándar */
     font-size: 1.2em;
 }
 
 .prev-icon::before {
     content: "🐱";
+    /* Gatito mirando atrás */
     font-size: 1em;
     transform: scaleX(-1);
+    /* Voltear el gato para que mire a la izquierda */
     display: inline-block;
 }
 
 .next-icon::before {
     content: "🐱";
+    /* Gatito mirando adelante */
     font-size: 1em;
 }
 
-/* Barra de progreso */
+/* --- BARRA DE PROGRESO (Línea de tiempo) --- */
 .progress-container {
     flex: 1;
+    /* Ocupa el espacio sobrante en el medio */
     min-width: 200px;
     margin: 0 15px;
 }
@@ -159,29 +204,33 @@
     width: 100%;
     height: 15px;
     background: #fff;
+    /* Fondo blanco de la barra vacía */
     border-radius: 15px;
     cursor: pointer;
     position: relative;
     overflow: hidden;
     border: 2px solid #ce93d8;
-    /* Purple border */
+    /* Borde morado */
 }
 
+/* La parte rellena de la barra (el progreso actual) */
 .progress-fill {
     height: 100%;
+    /* Rayitas diagonales animadas */
     background: repeating-linear-gradient(45deg,
             #42a5f5,
             #42a5f5 10px,
             #ab47bc 10px,
             #ab47bc 20px);
-    /* Blue/Purple stripes */
     border-radius: 15px;
     width: 0%;
+    /* JS cambia esto mientras avanza la canción */
     transition: width 0.1s ease;
     position: relative;
     box-shadow: 0 2px 8px rgba(33, 150, 243, 0.3);
 }
 
+/* La bolita al final de la barra (una madeja de lana 🧶) */
 .progress-fill::after {
     content: "🧶";
     position: absolute;
@@ -191,8 +240,10 @@
     font-size: 18px;
     filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.1));
     animation: spin 2s linear infinite;
+    /* Gira sola */
 }
 
+/* Animación de giro para la lana */
 @keyframes spin {
     0% {
         transform: translateY(-50%) rotate(0deg);
@@ -208,12 +259,11 @@
     justify-content: space-between;
     font-size: 1em;
     color: #4a148c;
-    /* Purple */
     margin-top: 5px;
     font-weight: bold;
 }
 
-/* Control de volumen */
+/* --- VOLUMEN --- */
 .volume-container {
     display: flex;
     align-items: center;
@@ -223,7 +273,6 @@
 
 .volume-icon {
     color: #1565c0;
-    /* Blue */
     font-size: 1.3em;
     cursor: pointer;
     transition: transform 0.2s;
@@ -231,8 +280,10 @@
 
 .volume-icon:hover {
     transform: scale(1.2);
+    /* Crece un poquito */
 }
 
+/* Estilo del deslizador de volumen (Slider) */
 .volume-slider {
     width: 90px;
     height: 10px;
@@ -241,16 +292,18 @@
     outline: none;
     cursor: pointer;
     -webkit-appearance: none;
+    /* Quita el estilo feo por defecto del navegador */
     appearance: none;
     border: 2px solid #90caf9;
 }
 
+/* La bolita del volumen */
 .volume-slider::-webkit-slider-thumb {
     -webkit-appearance: none;
     width: 20px;
     height: 20px;
     background: #ab47bc;
-    /* Purple thumb */
+    /* Morado */
     border: 2px solid #fff;
     border-radius: 50%;
     cursor: pointer;
@@ -262,17 +315,22 @@
     transform: scale(1.2);
 }
 
-/* Gatito DJ bailando */
+/* --- ANIMACIONES DIVERTIDAS --- */
+
+/* Gatito bailando encima del reproductor */
 .dancing-cat {
     position: absolute;
     right: 30px;
     top: -50px;
+    /* Sale por arriba */
     font-size: 3.5em;
     opacity: 0;
+    /* Invisible al principio */
     transition: all 0.4s ease;
     filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
 }
 
+/* Cuando esta clase 'active' se añade, el gato aparece y baila */
 .dancing-cat.active {
     opacity: 1;
     animation: djDance 0.6s ease-in-out infinite alternate;
@@ -288,7 +346,7 @@
     }
 }
 
-/* Ecualizador visual */
+/* Barras de ecualizador (saltan con la música simulada) */
 .equalizer {
     position: absolute;
     left: 30px;
@@ -296,6 +354,7 @@
     display: flex;
     gap: 4px;
     opacity: 0;
+    /* Invisible si no hay música */
     transition: opacity 0.3s ease;
     background: rgba(255, 255, 255, 0.8);
     padding: 5px 10px;
@@ -310,11 +369,11 @@
 .eq-bar {
     width: 6px;
     background: #42a5f5;
-    /* Blue */
     border-radius: 3px;
     animation: equalizer 0.5s ease-in-out infinite alternate;
 }
 
+/* Cada barra tiene un retardo diferente para que parezca aleatorio */
 .eq-bar:nth-child(1) {
     height: 15px;
     animation-delay: 0s;
@@ -345,26 +404,34 @@
         transform: scaleY(0.3);
     }
 
+    /* Encoje */
     100% {
         transform: scaleY(1);
     }
+
+    /* Estira */
 }
 
-/* Lista de reproducción DJ Cats */
+/* --- LISTA DE REPRODUCCIÓN (Playlist) --- */
 .playlist-container {
     position: absolute;
     bottom: 110%;
+    /* Aparece ENCIMA del reproductor */
     left: 20px;
     right: 20px;
     background: rgba(255, 255, 255, 0.95);
     max-height: 300px;
     overflow-y: auto;
+    /* Scroll si hay muchas canciones */
     border: 4px solid #ce93d8;
-    /* Purple border */
     border-radius: 20px;
+
+    /* Efecto de aparición */
     transform: translateY(20px) scale(0.95);
     opacity: 0;
     pointer-events: none;
+    /* No se puede clickear si está oculta */
+
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     box-shadow: 0 -5px 20px rgba(171, 71, 188, 0.4);
     font-family: 'Shadows Into Light', cursive;
@@ -374,15 +441,14 @@
     transform: translateY(0) scale(1);
     opacity: 1;
     pointer-events: auto;
+    /* Ahora sí se puede clickear */
 }
 
 .playlist-header {
     padding: 15px 20px;
     background: #f3e5f5;
-    /* Light Purple */
     border-bottom: 2px solid #ce93d8;
     color: #6a1b9a;
-    /* Dark Purple */
     font-weight: bold;
     font-size: 1.3em;
     text-align: center;
@@ -396,7 +462,6 @@
     border-bottom: 1px solid #f3e5f5;
     cursor: pointer;
     color: #7b1fa2;
-    /* Purple Text */
     transition: all 0.2s ease;
     display: flex;
     justify-content: space-between;
@@ -405,14 +470,14 @@
 
 .playlist-item:hover {
     background: #e3f2fd;
-    /* Light Blue hover */
     padding-left: 25px;
+    /* Efecto de desplazamiento a la derecha */
     color: #1565c0;
 }
 
+/* Canción que está sonando actualmente */
 .playlist-item.active {
     background: #e1bee7;
-    /* Active Purple */
     color: #4a148c;
     font-weight: bold;
     border-left: 5px solid #8e24aa;
@@ -420,19 +485,6 @@
 
 .playlist-item.active::after {
     content: "🐱";
-    /* Changed to cat face */
-}
-
-/* Added cool cat cursors/hovers */
-.playlist-item::before {
-    content: "🐾";
-    opacity: 0;
-    margin-right: 5px;
-    transition: opacity 0.2s;
-}
-
-.playlist-item:hover::before {
-    opacity: 1;
 }
 
 .playlist-toggle {
@@ -456,124 +508,11 @@
     transform: rotate(15deg);
 }
 
-/* Estilos de Minimización */
+/* --- BOTÓN MINIMIZAR (Flecha ▲ / ▼) --- */
 .minimize-btn {
     position: absolute;
     top: -20px;
-    right: 20px;
-    width: 40px;
-    height: 40px;
-    background: #6a1b9a;
-    /* Purple */
-    border: 3px solid #fff;
-    border-radius: 50%;
-    color: white;
-    font-weight: bold;
-    cursor: pointer;
-    z-index: 1000;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s ease;
-}
-
-.minimize-btn:hover {
-    transform: scale(1.1);
-    background: #8e24aa;
-}
-
-/* Scrollbar personalizada */
-.playlist-container::-webkit-scrollbar {
-    width: 8px;
-}
-
-.playlist-container::-webkit-scrollbar-track {
-    background: #fff;
-    border-radius: 0 20px 20px 0;
-}
-
-.playlist-container::-webkit-scrollbar-thumb {
-    background: #ce93d8;
-    border-radius: 4px;
-}
-
-.playlist-container::-webkit-scrollbar-thumb:hover {
-    background: #ba68c8;
-}
-
-/* Responsive (Manteniendo selectores anteriores) */
-@media (max-width: 768px) {
-    .music-player {
-        padding: 10px 15px;
-        bottom: 10px;
-        left: 10px;
-        right: 10px;
-    }
-
-    .player-container {
-        gap: 10px;
-    }
-
-    .song-info {
-        min-width: 150px;
-    }
-
-    .control-btn {
-        width: 40px;
-        height: 40px;
-        font-size: 1em;
-    }
-
-    .play-btn {
-        width: 55px;
-        height: 55px;
-    }
-
-    .progress-container {
-        min-width: 150px;
-        margin: 0 10px;
-    }
-
-    .volume-container {
-        min-width: 100px;
-    }
-
-    .volume-slider {
-        width: 60px;
-    }
-}
-
-@media (max-width: 480px) {
-    .player-container {
-        flex-direction: column;
-        gap: 8px;
-    }
-
-    .song-info {
-        text-align: center;
-        min-width: auto;
-    }
-
-    .progress-container {
-        order: -1;
-        margin: 0;
-        min-width: auto;
-    }
-
-    .dancing-cat {
-        display: none;
-    }
-
-    .equalizer {
-        display: none;
-    }
-}
-
-/* Botón de minimizar (Flecha arriba/abajo) */
-.minimize-btn {
-    position: absolute;
-    top: -20px;
+    /* Sale por arriba un poquito */
     right: 20px;
     width: 40px;
     height: 40px;
@@ -597,24 +536,110 @@
     background: #8e24aa;
 }
 
-/* =========================================
-   ESTILOS DEL ESTADO MINIMIZADO 
-   ========================================= */
+/* Personalizar barra de scroll de la lista */
+.playlist-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.playlist-container::-webkit-scrollbar-track {
+    background: #fff;
+    border-radius: 0 20px 20px 0;
+}
+
+.playlist-container::-webkit-scrollbar-thumb {
+    background: #ce93d8;
+    border-radius: 4px;
+}
+
+.playlist-container::-webkit-scrollbar-thumb:hover {
+    background: #ba68c8;
+}
+
+
+/* =========================================================
+   DISEÑO RESPONSIVO (MÓVILES)
+   =========================================================
+   Aquí cambiamos las cosas para que se vean bien en celulares
+*/
+
+@media (max-width: 768px) {
+    .music-player {
+        padding: 10px 15px;
+        /* Menos relleno */
+        bottom: 10px;
+        left: 10px;
+        right: 10px;
+    }
+
+    .player-container {
+        gap: 10px;
+    }
+
+    .control-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 1em;
+    }
+
+    /* Botones más pequeños */
+    .play-btn {
+        width: 55px;
+        height: 55px;
+    }
+
+    .volume-slider {
+        width: 60px;
+    }
+
+    /* Slider más corto */
+}
+
+@media (max-width: 480px) {
+
+    /* En pantallas MUY pequeñas, ponemos cosas una debajo de otra */
+    .player-container {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .song-info {
+        text-align: center;
+    }
+
+    /* Texto centrado */
+
+    /* El gato y el ecualizador desaparecen para ahorrar espacio */
+    .dancing-cat,
+    .equalizer {
+        display: none;
+    }
+
+    .progress-container {
+        order: -1;
+        width: 100%;
+        margin: 0;
+    }
+}
+
+
+/* =========================================================
+   ESTADO MINIMIZADO (Cuando le das a la flechita ▼)
+   =========================================================
+*/
+
 .music-player.minimized {
-    /* Se reduce el tamaño al mínimo necesario */
     width: auto;
+    /* Ya no ocupa todo el ancho */
     padding: 10px 20px;
     left: auto;
+    /* Se pega a la derecha */
     right: 20px;
     bottom: 20px;
     border-radius: 50px;
+    /* Se vuelve una píldora redonda */
 }
 
-.music-player.minimized .player-container {
-    width: auto;
-}
-
-/* Ocultar elementos que no caben en modo mini */
+/* Cuando está minimizado, OCULTAMOS todo esto: */
 .music-player.minimized .song-info,
 .music-player.minimized .progress-container,
 .music-player.minimized .volume-container,
@@ -624,17 +649,7 @@
     display: none !important;
 }
 
+/* Solo dejamos los botones principales */
 .music-player.minimized .player-controls {
     gap: 10px;
-}
-
-.music-player.minimized .control-btn {
-    width: 40px;
-    height: 40px;
-    font-size: 1em;
-}
-
-.music-player.minimized .play-btn {
-    width: 50px;
-    height: 50px;
 }

@@ -8,10 +8,8 @@ body {
     font-style: normal;
     min-height: 100vh;
 
-    /* PADDING INFERIOR IMPORTANTE:
-       Se agrega 250px extra al final para que el reproductor de música 
-       no tape el contenido de la tabla al hacer scroll hasta abajo. */
-    padding: 40px 20px 250px 20px;
+    /* PADDING INFERIOR IMPORTANTE */
+    padding: -56px 20px 350px 20px;
     color: #0d47a1;
 }
 
@@ -42,7 +40,7 @@ p {
     color: #1565c0;
     font-size: 2em;
     margin-bottom: 30px;
-    text-shadow: 1px 1px 0 #fff;
+    text-shadow: 1px 1px 0 #fafafa;
 }
 
 a {
@@ -58,6 +56,8 @@ a:hover {
     transform: translateY(-1px);
 }
 
+/* ESTILOS DE LA TABLA (PROYECTOS)*/
+
 table {
     width: 100%;
     margin: 20px auto;
@@ -66,7 +66,7 @@ table {
     border-radius: 20px;
     overflow: hidden;
     table-layout: fixed;
-    /* Ensures columns respect width */
+    /* Asegura que las columnas respeten el ancho */
     box-shadow: 0 10px 30px rgba(33, 150, 243, 0.3);
     backdrop-filter: blur(10px);
     border: 3px solid #90caf9;
@@ -78,7 +78,7 @@ th {
     padding: 25px 20px;
     text-align: center;
     font-size: 2em;
-    /* Increased size */
+    /* Tamaño aumentado */
     font-weight: 400;
     border-bottom: 3px solid #e3f2fd;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
@@ -86,7 +86,7 @@ th {
 
 td {
     padding: 25px 20px;
-    /* Increased size */
+    /* Tamaño aumentado */
     text-align: center;
     border-top: 1px solid #e3f2fd;
     font-size: 1.4em;
@@ -96,6 +96,7 @@ td {
     color: #1565c0;
 }
 
+/* Párrafos dentro de la tabla */
 td p {
     margin: 0;
     padding: 0;
@@ -105,6 +106,7 @@ td p {
     text-shadow: none;
 }
 
+/* Enlaces dentro de la tabla */
 td a {
     display: inline-block;
     max-width: 100%;
@@ -114,85 +116,4 @@ td a {
 
 td br {
     line-height: 1.5;
-}
-
-/* Responsive */
-@media (max-width: 1024px) {
-    .container {
-        width: 95%;
-        padding: 15px;
-    }
-
-    th {
-        font-size: 1.7em;
-        padding: 20px 15px;
-    }
-
-    td {
-        font-size: 1.2em;
-        padding: 20px 15px;
-    }
-}
-
-@media (max-width: 768px) {
-    p {
-        font-size: 1.5em;
-    }
-
-    th {
-        font-size: 1.4em;
-        padding: 15px 10px;
-    }
-
-    td {
-        font-size: 1.1em;
-        padding: 15px 10px;
-    }
-
-    table {
-        border-radius: 15px;
-    }
-}
-
-@media (max-width: 480px) {
-    .container {
-        width: 98%;
-        padding: 10px;
-    }
-
-    p {
-        font-size: 1.2em;
-    }
-
-    th {
-        font-size: 1.2em;
-        padding: 12px 8px;
-    }
-
-    td {
-        font-size: 1em;
-        padding: 12px 8px;
-    }
-
-    /* En móviles muy pequeños, hacer la tabla scrolleable */
-    table {
-        display: block;
-        overflow-x: auto;
-        white-space: nowrap;
-        table-layout: auto;
-        /* Reset specifically for mobile scroll */
-    }
-
-    table tbody,
-    table tr,
-    table td {
-        display: table;
-        width: 100%;
-    }
-
-    td {
-        display: block;
-        /* Stack cells on mobile if needed or keep as table-cell depending on preference, sticking to horizontal scroll for now */
-        display: table-cell;
-    }
 }
